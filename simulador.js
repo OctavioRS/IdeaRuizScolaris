@@ -1,75 +1,234 @@
-let nombre = prompt("Ingrese su nombre")
-let contraseña = prompt("Cree una contraseña, no debe ser igual a su nombre");
-//CICLO
-while (contraseña == nombre) {
-    alert("la contraseña no debe ser igual a tu nombre");
-    if (contraseña != nombre) {
-        alert("contraseña creada con exito!")
-    }
-    nombre = prompt("Ingrese su nombre")
-    contraseña = prompt("Cree una contraseña, no debe ser igual a su nombre")
-    alert("contraseña creada con exito!")
-    break;
-}
-//ARRAY
-let avisoEstilos = alert("Los estilos disponibles son:")
-let Estilos = ["ipa: $500", "apa: $400", "stout: $300", "honey: $200"]
-//CICLO
-for (let i = 0; i < 4; i++) {
-   alert(Estilos[i]);
-}
-let estilos = Number(prompt(`Ingrese el numero de estilo que desea:
-    1.IPA
-    2.APA
-    3.STOUT 
-    4.HONEY`))
-let unidades = Number(prompt("elija el numero de unidades"))
+//CUENTA DEL CLIENTE
 
-let ipa = 500
-let apa = 400
-let stout = 300
-let honey = 200
-//CONDICIONAL Y FUNCION
-function total(){
-    if (estilos == 1){
-    alert("el total a pagar es " + (ipa * unidades))
-    } else if(estilos == 2){
-    alert("el total a pagar es " + (apa * unidades))
-    } else if (estilos == 3){
-    alert("el total a pagar es " + (stout * unidades))
-    } else if(estilos == 4){
-    alert ("el total a pagar es " + (honey * unidades))}
-    else("elija un estilo")
+const formulario = document.querySelector("#usuarioContraseña")
+let datosfinales= document.querySelector("#datosFinales")
+let mensajeFInal = document.querySelector(".mensajeFinal")
+let usuario = document.querySelector("#usuario").value
+let contraseña = document.querySelector("#contraseña").value
+formulario.addEventListener("submit" , (e)=>{
+    e.preventDefault();
+     const {nombre, contraseña} = e.target;
+     datosfinales.innerHTML =`
+     <p> tus datos son: <br>
+     ${nombre.value} <br>
+     ${contraseña.value}
+     `
+     localStorage.setItem(nombre.value,contraseña.value)
+})
 
-}
+const botonFinalizar= document.querySelector("#finalizar")
+botonFinalizar.addEventListener("click", (contraseña , usuario)=>{
+   
+            Swal.fire('Cuenta creada con éxito')
+   
+})
 
-total();
+//DATOS DE COMPRA
+const datosNombre = document.querySelector("#nombre")
+const datosDireccion = document.querySelector("#direccion")
+const datosTelefono = document.querySelector("#telefono")
 
-//ARRAY Y OBJETOS
-let filtrado = [
-    {   nombre : "ipa",
+datosNombre.addEventListener("input", function(){})
+
+datosDireccion.addEventListener("input", function(){})
+
+datosTelefono.addEventListener("input", function () {
+})
+
+let form = document.querySelector("#form")
+let datosIngresados = document.querySelector("#datosDelCliente")
+const datosDeCompra = form.addEventListener("submit", function (e){
+    e.preventDefault();
+    datosDelCliente.innerHTML=`
+ <h5> Los datos ingresados son: </h5>
+
+<p>${datosNombre.value}</p>
+<p>${datosDireccion.value}</p>
+<p>${datosTelefono.value}</p>
+    `
+});
+
+//ARRAY TRANSFORMADO A JSON
+let localArray= [
+    {   
+        id: 1,
+        nombre : "Ipa",
         color : "rubia",
         amargor : "alto",
-        maridaje : "carnes"},
+        precio: "$500",
+        img: "images/ipa.jpeg"},
     
-    {   nombre : "apa",
+    {   id: 2,
+        nombre : "Apa",
         color : "rubia",
         amargor : "alto",
-        maridaje : "carnes"},
+        precio: "$500",
+        img: "images/apa.jpeg"},
 
-    {   nombre : "stout",
+    {   id: 3,
+        nombre : "Stout",
         color : "negro",
         amargor : "bajo",
-        maridaje : "pastas"},
+        precio: "$500",
+        img: "images/stout.jpeg"},
 
-    {   nombre : "honey",
+    {   id: 4,
+        nombre : "Honey",
         color : "rubia",
         amargor : "bajo",
-        maridaje : "pastas"},
+        precio: "$500",
+        img: "images/honey.jpeg"},
+];
+
+let enJson= JSON.stringify(localArray)
+let localJSOn = localStorage.setItem("arrayenJson", enJson)
+
+//utilizado del archivo json
+const json = `
+[
+    {   
+        "id": 1,
+        "nombre" : "Ipa",
+        "color" : "rubia",
+        "amargor" : "alto",
+        "precio": "$500",
+        "img": "images/ipa.jpeg"},
+    
+    {   "id": 2,
+        "nombre" : "Apa",
+        "color" : "rubia",
+        "amargor" : "alto",
+        "precio": "$500",
+        "img": "images/apa.jpeg"},
+
+    {   "id": 3,
+        "nombre" : "Stout",
+        "color" : "negro",
+        "amargor" : "bajo",
+        "precio": "$500",
+        "img": "images/stout.jpeg"},
+
+    {   "id": 4,
+        "nombre" : "Honey",
+        "color" : "rubia",
+        "amargor" : "bajo",
+        "precio": "$500",
+        "img": "images/honey.jpeg"}
 ]
-//USO DE METODOS
-const amargas = filtrado.filter(n => n.amargor === "alto");
-const suaves = filtrado.filter(n => n.amargor === "bajo");
-const maridarCarnes = filtrado.filter(n => n.maridaje === "carnes");
-const maridarPastas = filtrado.filter(n => n.maridaje === "pastas");
+`
+const dataJson = JSON.parse(json)
+
+//CARDS
+
+let cervezas = [
+    {   
+        id: 1,
+        nombre : "Ipa",
+        color : "rubia",
+        amargor : "alto",
+        precio: 500,
+        img: "images/ipa.jpeg"},
+    
+    {   id: 2,
+        nombre : "Apa",
+        color : "rubia",
+        amargor : "alto",
+        precio: 400,
+        img: "images/apa.jpeg"},
+
+    {   id: 3,
+        nombre : "Stout",
+        color : "negro",
+        amargor : "bajo",
+        precio: 500,
+        img: "images/stout.jpeg"},
+
+    {   id: 4,
+        nombre : "Honey",
+        color : "rubia",
+        amargor : "bajo",
+        precio: 300,
+        img: "images/honey.jpeg"}
+]
+
+const carrito = []
+const contenedorDeCards = document.querySelector("#containerCards")
+const modalPagina = document.querySelector("#modalCarrito")
+let mostrarModal= document.querySelector("#modalContainer");
+
+//RECORRIENDO EL ARRAY
+cervezas.forEach((el)=> { 
+    let cards = document.createElement("div");
+    cards.className= "card mx-3" 
+    cards.style= "width: 18rem"
+    cards.innerHTML= `
+    <img src=${el.img}>
+    <h2> ${el.nombre}<h2>
+    <h3> ${el.amargor}<h3>
+    <p> $ ${el.precio}<p>
+    
+    `
+    containerCards.append(cards)
+
+    let botonComprar = document.createElement("button")
+    botonComprar.className= " btn btn-warning my-2"
+    botonComprar.innerText = "Comprar",
+
+    cards.append(botonComprar)
+
+    botonComprar.addEventListener("click", ()=>
+    carrito.push({
+        id : el.id,
+        nombre : el.nombre,
+        amargor : el.amargor,
+        precio: el.precio,
+        img: el.img,
+    }))
+    
+});
+
+//CREANDO MODAL
+const iconoDeCarrito = document.querySelector("#iconoDeCarrito")
+iconoDeCarrito.addEventListener("click", ()=>{
+const modalHeader = document.createElement("div")
+modalHeader.className= "modalHeader"
+modalHeader.innerHTML= `
+<h1> Carrito </h1>
+`
+mostrarModal.append(modalHeader)
+
+const modalbutton = document.createElement("button")
+modalbutton.innerText="x"
+modalbutton.className= "btn btn-danger"
+
+modalbutton.addEventListener("click", ()=> {
+    mostrarModal.style.display = "none"
+});
+
+//BORRAR MODAL
+modalHeader.append(modalbutton)
+//recorriendo carrito
+carrito.forEach((el)=>{
+const modalContent = document.createElement("div")
+modalContent.className= "modalContent"
+modalContent.innerHTML=
+`
+<img src=" ${el.img}" class="w-25">
+<h3> ${el.nombre} </h3>
+<p> ${el.precio} </p>
+`
+mostrarModal.append(modalContent)
+});
+
+//SUMANDO PRECIO DE PRODUCTOS
+const total = carrito.reduce((acc, el) => acc + el.precio, 0)
+
+const footerModal= document.createElement("div")
+footerModal.className="footerModal"
+footerModal.innerHTML=`
+<h3> Total a pagar $ ${total} </h3>
+`
+mostrarModal.append(footerModal)
+});
+
 

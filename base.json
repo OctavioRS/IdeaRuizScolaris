@@ -1,0 +1,30 @@
+ [
+    {   
+        "id": 1,
+        "nombre" : "Ipa",
+        "color" : "rubia",
+        "amargor" : "alto",
+        "precio": "$500",
+        "img": "images/ipa.jpeg"},
+    
+    {   "id": 2,
+        "nombre" : "Apa",
+        "color" : "rubia",
+        "amargor" : "alto",
+        "precio": "$500",
+        "img": "images/apa.jpeg"},
+
+    {   "id": 3,
+        "nombre" : "Stout",
+        "color" : "negro",
+        "amargor" : "bajo",
+        "precio": "$500",
+        "img": "images/stout.jpeg"},
+
+    {   "id": 4,
+        "nombre" : "Honey",
+        "color" : "rubia",
+        "amargor" : "bajo",
+        "precio": "$500",
+        "img": "images/honey.jpeg"}
+]
