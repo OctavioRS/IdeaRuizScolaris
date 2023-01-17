@@ -1,26 +1,3 @@
-//CUENTA DEL CLIENTE
-
-const formulario = document.querySelector("#usuarioContraseña")
-let datosfinales= document.querySelector("#datosFinales")
-let mensajeFInal = document.querySelector(".mensajeFinal")
-let usuario = document.querySelector("#usuario").value
-let contraseña = document.querySelector("#contraseña").value
-formulario.addEventListener("submit" , (e)=>{
-    e.preventDefault();
-     const {nombre, contraseña} = e.target;
-     datosfinales.innerHTML =`
-     <p> tus datos son: <br>
-     ${nombre.value} <br>
-     ${contraseña.value}
-     `
-     localStorage.setItem(nombre.value,contraseña.value)
-     
-})
-
-const botonFinalizar= document.querySelector("#finalizar")
-botonFinalizar.addEventListener("click", ()=>{
-            Swal.fire('Cuenta creada con éxito')
-})
 
 //DATOS DE COMPRA
 const datosNombre = document.querySelector("#nombre")
@@ -46,61 +23,15 @@ const datosDeCompra = form.addEventListener("submit", function (e){
 <p>${datosTelefono.value}</p>
     `
 });
-/*
-//ARRAY DE PRODUCTOS
-let localArray= [
-    {   
-        id: 1,
-        nombre : "Ipa",
-        color : "rubia",
-        amargor : "alto",
-        precio: "$500",
-        img: "images/ipa.jpeg"},
-    
-    {   id: 2,
-        nombre : "Apa",
-        color : "rubia",
-        amargor : "alto",
-        precio: "$500",
-        img: "images/apa.jpeg"},
-
-    {   id: 3,
-        nombre : "Stout",
-        color : "negro",
-        amargor : "bajo",
-        precio: "$500",
-        img: "images/stout.jpeg"},
-
-    {   id: 4,
-        nombre : "Honey",
-        color : "rubia",
-        amargor : "bajo",
-        precio: "$500",
-        img: "images/honey.jpeg"},
-];
-
-//Transformando array en string
-let enJson= JSON.stringify(localArray)
-//Guardando en localstorage
-let localJSOn = localStorage.setItem("arrayenJson", enJson)
-//Recuperando de local storage
-let arrayRecuperado = localStorage.getItem("arrayenJson")
-//Transformando nuevamente en array
-let transformArray = JSON.parse(arrayRecuperado)
-*/
-
-
-
 
 
 //CARRITO
-let carrito = JSON.parse(localStorage.getItem("carrito")) || []
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+const contador = document.querySelector(".contador")
 const contenedorDeCards = document.querySelector("#containerCards")
-//MODAL
-const modalPagina = document.querySelector("#modalCarrito")
 let mostrarModal= document.querySelector("#modalContainer");
 
-//RECORRIENDO EL ARRAY CON DATOS DEL JSON
+//Pintar cards
 
 
 const pedirCards = async()=>{
@@ -126,20 +57,41 @@ data.forEach((el)=> {
     cards.append(botonComprar)
 
     botonComprar.addEventListener("click", () => {
+
+        const comprobarRepetido = carrito.some((prod) => prod.id === el.id);
+        
+        if (comprobarRepetido){
+            carrito.map((producto) => {
+                if(producto.id === el.id){
+                    producto.cantidad++
+                }
+            })
+        } else{
         carrito.push({
             id : el.id,
             nombre : el.nombre,
             amargor : el.amargor,
             precio: el.precio,
             img: el.img,
-        });
-        localStorage.setItem("carrito", JSON.stringify(carrito));
+            cantidad: el.cantidad,
+        })};
+        setItem()
+        contar()
     });
 
 })}
-
 pedirCards()
+//******************************************************/
+//Contador de productos en el carrito
 
+    let contar = ()=>{
+        contador.style.display = "inline-block"
+        contador.innerText = carrito.length}
+//********************************************************/
+//set item
+const setItem = () => {
+localStorage.setItem("carrito", JSON.stringify(carrito));}
+//********************************************************/
 
 //CREANDO MODAL
 const iconoDeCarrito = document.querySelector("#iconoDeCarrito")
@@ -160,8 +112,9 @@ modalbutton.className= "btn btn-danger"
 
 modalbutton.addEventListener("click", ()=> {
     mostrarModal.style.display = "none"
-});
+  });
 modalHeader.append(modalbutton)
+
 
 //recorriendo carrito 
 carrito.forEach((el)=>{
@@ -169,11 +122,34 @@ const modalContent = document.createElement("div")
 modalContent.className= "modalContent"
 modalContent.innerHTML=
 `
-<img src=" ${el.img}" class="w-10">
-<h3> ${el.nombre} </h3>
-<p> ${el.precio} </p>
+<img src="${el.img}" class="imgModal">
+<h3 class="nombreBirras"> ${el.nombre} </h3>
+<span class="disminuir"> ➖ </span>
+<p> Cantidad: ${el.cantidad}</p>
+<span class="aumentar"> ➕ </span>
+<p> $ ${el.precio * el.cantidad} </p>
 `
 mostrarModal.append(modalContent)
+
+let disminuir = modalContent.querySelector(".disminuir")
+let aumentar = modalContent.querySelector(".aumentar")
+
+disminuir.addEventListener("click", ()=>{
+    if(el.cantidad <= 0){
+        el.cantidad;
+    pintarCarrito()
+    }else{
+        el.cantidad--;
+        pintarCarrito()
+    }
+});
+
+aumentar.addEventListener("click", ()=>{
+    el.cantidad++;
+    pintarCarrito()
+});
+
+
 
 //eliminar productos dentro del modal
 
@@ -182,27 +158,37 @@ const findID = carrito.find ((prod) => prod.id)
 carrito = carrito.filter((carritoID) => {
     return carritoID !== findID;
 })
-
- pintarCarrito()
+contar()
+pintarCarrito()
 }
 const eliminar = document.createElement("span")
-eliminar.innerText = "❌"
+eliminar.innerText = "🗑️"
 eliminar.className= "delete-product"
 eliminar.className="eliminar-btn"
 modalContent.append(eliminar)
-
 
 eliminar.addEventListener("click", eliminarProductos)
 });
 
 //SUMANDO PRECIO DE PRODUCTOS
-const total = carrito.reduce((acc, el) => acc + el.precio, 0)
+const total = carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0)
 
 const footerModal= document.createElement("div")
 footerModal.className="footerModal"
 footerModal.innerHTML=`
-<h3> Total a pagar $ ${total} </h3>
+<h3> Total a pagar: $ ${total} </h3>
+<span class="confirmarCompra btn btn-warning"> Comprar </span>
 `
+let confirmarLaCompra = footerModal.querySelector(".confirmarCompra")
+confirmarLaCompra.addEventListener("click", ()=>{
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Gracias por tu compra! En breve sale en camino',
+        showConfirmButton: false,
+        timer: 2500
+      })
+})
 mostrarModal.append(footerModal)
 }
 

@@ -1,4 +1,124 @@
+
+/***** Modal *******/
 .eliminar-btn{
     cursor: pointer;
 }
 
+#modalContainer{
+    width: 500px;  
+}
+.imgModal{
+    width: 100px;
+}
+#logo{
+    font-size: 40px;
+    font-weight: 500;
+}
+.icono-cuenta{
+    text-decoration: none;
+    color: black;
+}
+
+.icono-cuenta:hover{
+    color: grey;
+}
+
+#iconoDeCarrito{
+    cursor: pointer;
+    text-decoration: none;       
+}
+.contador{
+    background-color: rgb(44, 42, 42);
+    color: white;
+    border-radius: 30px;
+    padding: 2px 4px;
+    display: none;
+}
+.datosDelComprador{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.form-control{
+    width: 300px;
+    border: 0;
+    border-bottom: 2px solid black;
+    border-radius: 0;
+}
+.form-label{
+    width: 200px;
+}
+#modalContainer{
+    background-color: rgb(179, 179, 179);
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute; 
+    right: 0;  
+    top: 0;
+    padding: 10px;
+    display: none;
+}
+.modalHeader{
+    display: flex;
+    justify-content: space-between;
+}
+.btn{
+    padding: 2px ;
+    height: 30px;
+    margin-top: 4px;
+}
+.modalContent{
+    width: 100%;
+    display: flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.modalContent,p{
+    margin: 0px 0px 8px;
+}
+
+.imgModal{
+    border-radius: 10%;
+}
+
+.aumentar,.disminuir{
+    cursor: pointer;
+}
+
+.nombreBirras{
+    color: white;
+}
+
+/*Cuenta*/
+
+.cuenta{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    
+    
+}
+
+#usuarioContraseña{
+    display: flex;
+    align-items: center;
+    justify-content:end;
+    flex-direction: column;
+    background-color: white;
+    border: 2px solid grey;
+    border-radius: 20px;
+    padding: 10px;
+    width: 500px;
+    position: absolute;
+    top: 150px;
+}
+
+
+
+.bodyCuenta{
+    background-image: url("./images/pngtree-seamless-pattern-with-beer-hop-image_1086452.jpg") ;
+}
