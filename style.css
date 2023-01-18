@@ -1,9 +1,7 @@
-
 /***** Modal *******/
 .eliminar-btn{
     cursor: pointer;
 }
-
 #modalContainer{
     width: 500px;  
 }
@@ -18,11 +16,9 @@
     text-decoration: none;
     color: black;
 }
-
 .icono-cuenta:hover{
     color: grey;
 }
-
 #iconoDeCarrito{
     cursor: pointer;
     text-decoration: none;       
@@ -33,22 +29,6 @@
     border-radius: 30px;
     padding: 2px 4px;
     display: none;
-}
-.datosDelComprador{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.form-control{
-    width: 300px;
-    border: 0;
-    border-bottom: 2px solid black;
-    border-radius: 0;
-}
-.form-label{
-    width: 200px;
 }
 #modalContainer{
     background-color: rgb(179, 179, 179);
@@ -92,17 +72,29 @@
     color: white;
 }
 
+/*Datos del comprador*/
+.datosDelComprador{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.form-control{
+    width: 300px;
+    border: 0;
+    border-bottom: 2px solid black;
+    border-radius: 0;
+}
+.form-label{
+    width: 200px;
+}
 /*Cuenta*/
-
 .cuenta{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: red;
-    
-    
 }
-
 #usuarioContraseña{
     display: flex;
     align-items: center;
@@ -116,9 +108,6 @@
     position: absolute;
     top: 150px;
 }
-
-
-
 .bodyCuenta{
     background-image: url("./images/pngtree-seamless-pattern-with-beer-hop-image_1086452.jpg") ;
 }
