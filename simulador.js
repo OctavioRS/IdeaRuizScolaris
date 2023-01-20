@@ -17,6 +17,8 @@ const datosDeCompra = form.addEventListener("submit", function (e) {
 <p>${datosDireccion.value}</p>
 <p>${datosTelefono.value}</p>
     `;
+
+form.reset();
 });
 
 //CARRITO Y MODAL
